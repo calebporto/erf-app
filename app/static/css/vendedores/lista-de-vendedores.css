@@ -1,0 +1,141 @@
+.find {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+}
+.select {
+    width: 60%;
+    padding: 10px;
+}
+.select input {
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+.select p {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+.filter-button {
+    display: flex;
+    height: 100%;
+    width: 40%;
+    text-align: center;
+    margin-top: 41px;
+    margin-bottom: 0;
+}
+.filter-button button {
+    width: 80%;
+    height: 100%;
+    margin: auto;
+    margin-bottom: 0;
+}
+#limpar-filtro {
+    margin-top: 20px;
+}
+.list {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 15px;
+    margin-top: 15px;
+    align-items: center;
+    border-radius: 10px;
+}
+.list-title {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+.table-list {
+    padding: 15px;
+    width: 100%;
+    margin-top: 15px;
+    background-color: white;
+}
+.table-title {
+    font-weight: bold;
+}
+table {
+    border: solid 1px black;
+}
+table, td{
+    font-size: 15px;
+    padding: 2px 5px;
+    border-top: solid 1px black;
+    border-bottom: solid 1px black;
+    border-collapse: collapse;
+    margin: 0;
+}
+.td-row-waiting {
+    text-align: center;
+    height: 100px;
+}
+.td-name {
+    width: 50%;
+}
+.td-option {
+    width: auto;
+    text-align: center;
+}
+.option {
+    padding: 0 10px!important;
+    font-size: 12px;
+    border-radius: 5px;
+    margin-bottom: 3px;
+}
+.active {
+    background: linear-gradient(rgb(0, 82, 0), green)!important;
+    border: none!important;
+}
+.inactive {
+    background: linear-gradient(rgb(117, 117, 117), rgb(187, 185, 185))!important;
+    border: none!important;
+    color: black!important;
+}
+.view-group {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.view-item {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.two-it {
+    width: 50%;
+}
+.three {
+    width: 30%;
+}
+.item-title {
+    font-weight: bold;
+    margin-bottom: 0;
+    text-align: start;
+}
+.item-content {
+    margin-bottom: 0;
+    text-align: start;
+}
+.edit-group {
+    display: flex;
+    flex-direction: column;
+}
+.edit-item {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    width: 100%;
+}
+.edit-item span {
+    font-weight: bold;
+}
+input {
+    padding: 5px;
+}
+form {
+    width: 100%;
+    height: 100%;
+}

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/static/css/clientes/lista-de-clientes.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/patterns.css"/>
+    <title>Lista de Clientes - Distribuidora Bonsucesso</title>
+</head>
+<body>
+    <div class="barra-superior yellow-pt">
+        <div class="container container-barra-superior">
+            <div class="title">
+                <p>DISTRIBUIDORA BONSUCESSO</p>
+            </div>
+        </div>
+    </div>
+    <div class="conteudo">
+        <!-- Barra superior -->
+        <div class="cabecalho cabecalho-pt" id="cabecalho">
+            <div class="vacuo vacuo-pt"></div>
+            <div class="menu menu-pt">
+                <a href="/painel-administrativo/clientes/lista-de-clientes" class="active-menu">Lista de Clientes</a>
+                <a href="/painel-administrativo/clientes/cadastrar">Cadastrar</a>
+            </div>
+        </div>
+        <!-- Barra lateral -->
+        <div class="barra-lateral barra-lateral-pt" id="barra-lateral">
+            <a href="/painel-administrativo">Início</a>
+            <a href="/painel-administrativo/vendas">Vendas</a>
+            <a href="/painel-administrativo/clientes" class="active-lt-bar">Clientes</a>
+            <a href="/painel-administrativo/produtos">Produtos</a>
+            <a href="/painel-administrativo/vendedores">Vendedores</a>
+            <a href="/painel-administrativo/cobrancas">Cobranças</a>
+        </div>
+        <!-- Conteúdo da página -->
+        <div class="corpo corpo-pt" id="corpo">
+            {% set messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages  %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>{{ message }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <div class="find">
+                <div class="select">
+                    <p>Pesquisar (Nome Fantasia (CNPJ) ou Nome do Cliente (CPF)):</p>
+                    <input type="text" name="termo" id="find">
+                </div>
+                <div class="filter-button">
+                    <button class="confirm-btn" id="find-btn">Pesquisar</button>
+                </div>
+            </div>
+            <div class="limpar-filtro">
+                <button class="dismiss-btn" id="limpar-filtro">Limpar Filtros</button>
+            </div>
+            <div class="list">
+                <div class="list-title">
+                    <p class="table-title">Nome do Cliente:</p>
+                    <p class="table-title">Opções:</p>
+                </div>
+                <table class="table-list">
+                    {% for cliente in clientes %}
+                    <tr class="td-row">
+                        <!-- Nome -->
+                        <td class="td-name">{{ cliente.name }}</td>
+                        <!-- Visualizar -->
+                        <td class="td-option">
+                            <!-- Button trigger modal -->
+                            <button onclick="visualizarDataLoad('{{ cliente.id }}')" value="{{ cliente.id }}" id="visualizar-btn" type="button" class="option confirm-btn" data-bs-toggle="modal" data-bs-target="#visualizarStaticBackdrop{{ cliente.id }}">Visualizar</button>
+                            <input type="hidden" id="doctype{{ cliente.id }}" value="{{ cliente.doctype }}">
+                            <!-- Modal -->
+                            <div class="modal fade" id="visualizarStaticBackdrop{{ cliente.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="visualizarStaticBackdropLabel{{ cliente.id }}" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="visualizarStaticBackdropLabel{{ cliente.id }}">{{ cliente.name }}</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="view-group">
+                                                <div class="view-item two-it">
+                                                    <p class="item-title">Nome:</p>
+                                                    <p id="person-name{{ cliente.id }}" class="item-content">Carregando...</p>
+                                                </div>
+                                                <div class="view-item two-it">
+                                                    <p class="item-title">CNPJ/CPF:</p>
+                                                    <p id="person-cnpj-cpf{{ cliente.id }}" class="item-content">Carregando...</p>
+                                                </div>
+                                            </div>
+                                            <div class="view-group">
+                                                <div class="view-item two-it">
+                                                    <p class="item-title">Razão Social:</p>
+                                                    <p id="person-r-social{{ cliente.id }}" class="item-content">Carregando...</p>
+                                                </div>
+                                                <div class="view-item two-it">
+                                                    <p class="item-title">Inscrição Estadual:</p>
+                                                    <p id="person-ie{{ cliente.id }}" class="item-content">Carregando...</p>
+                                                </div>
+                                            </div>
+                                            <div class="view-group">
+                                                <div class="view-item three-it">
+                                                    <p class="item-title">E-mail:</p>
+                                                    <p id="person-email{{ cliente.id }}" class="item-content">Carregando...</p>
+                                                </div>
+                                                <div class="view-item three-it">
+                                                    <p class="item-title">Telefone:</p>
+                                                    <p id="person-tel{{ cliente.id }}" class="item-content">Carregando...</p>
+                                                </div>
+                                                <div class="view-item three-it">
+                                                    <p class="item-title">CEP:</p>
+                                                    <p id="person-cep{{ cliente.id }}" class="item-content">Carregando...</p>
+                                                </div>
+                                            </div>
+                                            <div class="view-group">
+                                                <div class="view-item three-it">
+                                                    <p class="item-title">Logradouro:</p>
+                                                    <p id="person-logradouro{{ cliente.id }}" class="item-content">Carregando...</p>
+                                                </div>
+                                                <div class="view-item three-it">
+                                                    <p class="item-title">Número:</p>
+                                                    <p id="person-num{{ cliente.id }}" class="item-content">Carregando...</p>
+                                                </div>
+                                                <div class="view-item three-it">
+                                                    <p class="item-title">Bairro:</p>
+                                                    <p id="person-bairro{{ cliente.id }}" class="item-content">Carregando...</p>
+                                                </div>
+                                            </div>
+                                            <div class="view-group">
+                                                <div class="view-item three-it">
+                                                    <p class="item-title">Complemento:</p>
+                                                    <p id="person-complemento{{ cliente.id }}" class="item-content">Carregando...</p>
+                                                </div>
+                                                <div class="view-item three-it">
+                                                    <p class="item-title">Cidade:</p>
+                                                    <p id="person-cidade{{ cliente.id }}" class="item-content">Carregando...</p>
+                                                </div>
+                                                <div class="view-item three-it">
+                                                    <p class="item-title">UF:</p>
+                                                    <p id="person-uf{{ cliente.id }}" class="item-content">Carregando...</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </td>
+                        <!-- Editar -->
+                        <td class="td-option">
+                            <button onclick="editarDataLoad('{{ cliente.id }}')" value="{{ cliente.id }}" id="editar-btn" type="button" class="option confirm-btn" data-bs-toggle="modal" data-bs-target="#editarStaticBackdrop{{ cliente.id }}">Editar</button>
+                            <form action="/painel-administrativo/clientes/lista-de-clientes" method="post">
+                                <div class="modal fade" id="editarStaticBackdrop{{ cliente.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editarStaticBackdropLabel{{ cliente.id }}" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="editarStaticBackdropLabel{{ cliente.id }}">{{ cliente.name }}</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <input type="hidden" name="type" value="alterar">
+                                            <input type="hidden" name="id" value="{{ cliente.id }}">
+                                            <div class="modal-body">
+                                                {% if cliente.doctype == 1 %}
+                                                <input type="hidden" name="doctype" value="1">
+                                                <div class="edit-group">
+                                                    <div class="edit-item">
+                                                        <span>Nome:</span>
+                                                        <input value="..." minlength="8" maxlength="50" type="text" name="nome" id="edit-nome{{ cliente.id }}">
+                                                    </div>
+                                                    <div class="edit-item">
+                                                        <span>Nascimento:</span>
+                                                        <input value="..." class="nascimento" minlength="10" maxlength="10" type="text" name="nascimento" id="edit-nasc{{ cliente.id }}">
+                                                    </div>
+                                                </div>
+                                                <div class="edit-group">
+                                                    <div class="edit-item">
+                                                        <span>CPF:</span>
+                                                        <input value="..." class="cpf" minlength="14" maxlength="14" type="text" name="cpf" id="edit-cpf{{ cliente.id }}">
+                                                    </div>
+                                                    <div class="edit-item">
+                                                        <span>Sexo:</span>
+                                                        <div class="edit-radio-group">
+                                                            <div class="edit-radio-item">
+                                                                <input type="radio" name="sexo" id="edit-sexo-m{{ cliente.id }}" value="masculino" required>
+                                                                <label for="edit-sexo-m{{ cliente.id }}">Masculino</label>
+                                                            </div>
+                                                            <div class="edit-radio-item">
+                                                                <input type="radio" name="sexo" id="edit-sexo-f{{ cliente.id }}" value="feminino" required>
+                                                                <label for="edit-sexo-f{{ cliente.id }}">Feminino</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% else %}
+                                                <input type="hidden" name="doctype" value="2">
+                                                <div class="edit-group">
+                                                    <div class="edit-item">
+                                                        <span>Nome-Fantasia:</span>
+                                                        <input value="..." minlength="6" maxlength="50" type="text" name="nome-fantasia" id="edit-nome-fantasia{{ cliente.id }}">
+                                                    </div>
+                                                    <div class="edit-item">
+                                                        <span>Razão Social:</span>
+                                                        <input value="..." minlength="6" maxlength="50" type="text" name="razao-social" id="edit-razao-social{{ cliente.id }}">
+                                                    </div>
+                                                </div>
+                                                <div class="edit-group">
+                                                    <div class="edit-item">
+                                                        <span>CNPJ:</span>
+                                                        <input value="..." class="cnpj" minlength="18" maxlength="18" type="text" name="cnpj" id="edit-cnpj{{ cliente.id }}">
+                                                    </div>
+                                                    <div class="edit-item">
+                                                        <span>Inscrição Estadual:</span>
+                                                        <input value="..." class="ie" minlength="9" maxlength="9" type="text" name="ie" id="edit-ie{{ cliente.id }}">
+                                                    </div>
+                                                </div>
+                                                {% endif %}
+                                                <div class="edit-group">
+                                                    <div class="edit-item">
+                                                        <span>Email:</span>
+                                                        <input value="..." minlength="12" maxlength="50" type="text" name="email" id="edit-email{{ cliente.id }}">
+                                                    </div>
+                                                    <div class="edit-item">
+                                                        <span>Telefone:</span>
+                                                        <input value="..." class="telefone" minlength="14" maxlength="15" type="text" name="telefone" id="edit-telefone{{ cliente.id }}">
+                                                    </div>
+                                                </div>
+                                                <div class="edit-group">
+                                                    <div class="edit-item">
+                                                        <span>CEP:</span>
+                                                        <input value="..." class="cep" minlength="10" maxlength="10" type="text" name="cep" id="edit-cep{{ cliente.id }}">
+                                                    </div>
+                                                </div>
+                                                <div class="edit-group">
+                                                    <div class="edit-item">
+                                                        <span>Logradouro:</span>
+                                                        <input value="..." minlength="4" maxlength="50" type="text" name="logradouro" id="edit-logradouro{{ cliente.id }}">
+                                                    </div>
+                                                    <div class="edit-item">
+                                                        <span>Número:</span>
+                                                        <input value="..." class="numero" minlength="1" maxlength="5" type="text" name="numero" id="edit-numero{{ cliente.id }}">
+                                                    </div>
+                                                </div>
+                                                <div class="edit-group">
+                                                    <div class="edit-item">
+                                                        <span>Complemento:</span>
+                                                        <input value="..." maxlength="50" type="text" name="complemento" id="edit-complemento{{ cliente.id }}">
+                                                    </div>
+                                                    <div class="edit-item">
+                                                        <span>Bairro:</span>
+                                                        <input value="..." minlength="3" maxlength="50" type="text" name="bairro" id="edit-bairro{{ cliente.id }}">
+                                                    </div>
+                                                </div>
+                                                <div class="edit-group">
+                                                    <div class="edit-item">
+                                                        <span>Cidade:</span>
+                                                        <input value="..." minlength="1" maxlength="50" type="text" name="cidade" id="edit-cidade{{ cliente.id }}">
+                                                    </div>
+                                                    <div class="edit-item">
+                                                        <span>UF:</span>
+                                                        <input value="..." class="uf" minlength="2" maxlength="2" type="text" name="uf" id="edit-uf{{ cliente.id }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                <button type="submit" class="btn btn-dark">Confirmar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            </td>
+                        <!-- Bloquear/Desbloquear -->
+                        <td class="td-option">
+                            {% if cliente.is_active == True %}
+                            <form action="/painel-administrativo/clientes/lista-de-clientes" method="post">
+                                <input type="hidden" name="type" value="bloquear">
+                                <input type="hidden" name="id" value="{{ cliente.id }}">
+                                <input type="hidden" name="doctype" value="{{ cliente.doctype }}">
+                                <button type="submit" class="option confirm-btn active">Bloquear</button>
+                            </form>
+                            {% else %}
+                            <form action="/painel-administrativo/clientes/lista-de-clientes" method="post">
+                                <input type="hidden" name="type" value="desbloquear">
+                                <input type="hidden" name="id" value="{{ cliente.id }}">
+                                <input type="hidden" name="doctype" value="{{ cliente.doctype }}">
+                                <button type="submit" class="option confirm-btn inactive">Desbloquear</button>
+                            </form>
+                            {% endif %}
+                        </td>
+                        <!-- Excluir -->
+                        <td class="td-option">
+                            <button type="button" class="option dismiss-btn" data-bs-toggle="modal" data-bs-target="#excluirexampleModal{{ cliente.id }}">
+                                Excluir
+                            </button>
+                              
+                              <!-- Modal -->
+                            <form action="/painel-administrativo/clientes/lista-de-clientes" method="post">
+                                <input type="hidden" name="type" value="excluir">
+                                <input type="hidden" name="doctype" value="{{ cliente.doctype }}">
+                                <input type="hidden" name="id" value="{{ cliente.id }}">
+                                <div class="modal fade" id="excluirexampleModal{{ cliente.id }}" tabindex="-1" aria-labelledby="excluirexampleModalLabel{{ cliente.id }}" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="excluirexampleModalLabel{{ cliente.id }}">Tem certeza?</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Tem certeza que deseja excluir o cliente</p>
+                                                <p> <strong> {{ (cliente.name).title() }}? </strong></p>
+                                                <p>Após excluir não é possível reverter.</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                <button type="submit" class="btn btn-warning">Confirmar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        <!-- Rodapé -->
+        <div class="rodape rodape-pt yellow-pt" id="rodape">
+            <p> &copy 2022 DISTRIBUIDORA BONSUCESSO - Todos os direitos reservados.
+                Desenvolvido por Porto Solutions - RJ </p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/static/js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="/static/js/clientes/lista-de-clientes.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.mask.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            if ($('#alert').val() != null) {
+                alert($(this))
+            };
+            $('.cnpj').mask('00.000.000/0000-00')
+            $('.cpf').mask('000.000.000-00')
+            $('.cep').mask('00.000-000')
+            $('.telefone').mask('(00) 00000-0000')
+            $('.nascimento').mask('00/00/0000')
+            $('.numero').mask('99999')
+            $('.ie').mask('000000000')
+            $('.uf').mask('AA', {'translation': {
+                A: {pattern: /[A-Za-z]/}
+            }});
+        });
+    </script>
+</body>
+</html>

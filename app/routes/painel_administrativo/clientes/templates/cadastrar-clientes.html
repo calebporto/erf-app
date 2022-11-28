@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/static/css/clientes/cadastrar-clientes.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/patterns.css"/>
+    <title>Cadastrar Cliente - Distribuidora Bonsucesso</title>
+</head>
+<body>
+    <div class="barra-superior yellow-pt">
+        <div class="container container-barra-superior">
+            <div class="title">
+                <p>DISTRIBUIDORA BONSUCESSO</p>
+            </div>
+        </div>
+    </div>
+    <div class="conteudo">
+        <!-- Barra superior -->
+        <div class="cabecalho cabecalho-pt" id="cabecalho">
+            <div class="vacuo vacuo-pt"></div>
+            <div class="menu menu-pt">
+                <a href="/painel-administrativo/clientes/lista-de-clientes">Lista de Clientes</a>
+                <a href="/painel-administrativo/clientes/cadastrar" class="active-menu">Cadastrar</a>
+            </div>
+        </div>
+        <!-- Barra lateral -->
+        <div class="barra-lateral barra-lateral-pt" id="barra-lateral">
+            <a href="/painel-administrativo">Início</a>
+            <a href="/painel-administrativo/vendas">Vendas</a>
+            <a href="/painel-administrativo/clientes" class="active-lt-bar">Clientes</a>
+            <a href="/painel-administrativo/produtos">Produtos</a>
+            <a href="/painel-administrativo/vendedores">Vendedores</a>
+            <a href="/painel-administrativo/cobrancas">Cobranças</a>
+        </div>
+        <!-- Conteúdo da página -->
+        <div class="corpo corpo-pt" id="corpo">
+            {% set messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages  %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>{{ message }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <div class="div-tipo-cliente">
+                <p>Qual o tipo de cliente?</p>
+                <select name="tipo-cliente" id="tipo-cliente">
+                    <option value="" selected disabled>-- Selecione o tipo de cliente --</option>
+                    <option value="1">Pessoa Física</option>
+                    <option value="2">Pessoa Jurídica</option>
+                </select>
+            </div>
+            <form id="form-cadastro" action="/painel-administrativo/clientes/cadastrar" method="post">
+                <!-- Formulário CPF -->
+                <div class="formulario" style="display: none;" id="formulario-cpf">
+                    <div class="item-group">
+                        <div class="item sexo">
+                            <p>Sexo:</p>
+                            <div class="radio-group">
+                                <div class="radio-item">
+                                    <input type="radio" name="sexo" id="sexo1" value="masculino" required>
+                                    <label for="masculino">Masculino</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" name="sexo" id="sexo2" value="feminino" required>
+                                    <label for="masculino">Feminino</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item cpf">
+                            <p>CPF:</p>
+                            <input minlength="14" maxlength="14" type="text" name="cpf" id="cpf" required>
+                        </div>
+                        <div class="item nome">
+                            <p>Nome:</p>
+                            <input minlength="8" maxlength="50" type="text" name="nome" id="nome" required>
+                        </div>
+                    </div>
+                    <div class="item-group">
+                        <div class="item nascimento">
+                            <p>Nascimento:</p>
+                            <input minlength="10" maxlength="10" type="text" name="nascimento" id="nascimento" required>
+                        </div>
+                        <div class="item telefone">
+                            <p>Telefone:</p>
+                            <input  minlength="14" maxlength="15" type="text" name="telefone" id="telefone" required>
+                        </div>
+                        <div class="item email">
+                            <p>Email</p>
+                            <input minlength="10" maxlength="50" type="text" name="email" id="email" required>
+                        </div>
+                    </div>
+                    <div class="item-group">
+                        <div class="item cep">
+                            <p>CEP:</p>
+                            <input minlength="10" maxlength="10" type="text" name="cep" id="cep" required>
+                        </div>
+                        <div class="item logradouro">
+                            <p>Logradouro (Rua, Avenida, etc):</p>
+                            <input minlength="2" maxlength="50" type="text" name="logradouro" id="logradouro" required>
+                        </div>
+                        <div class="item numero">
+                            <p>Número:</p>
+                            <input minlength="1" maxlength="5" type="text" name="numero" id="numero" required>
+                        </div>
+                        <div class="item bairro">
+                            <p>Bairro:</p>
+                            <input minlength="1" maxlength="50" type="text" name="bairro" id="bairro" required>
+                        </div>
+                    </div>
+                    <div class="item-group">
+                        <div class="item complemento">
+                            <p>Complemento</p>
+                            <input maxlength="50" type="text" name="complemento" id="complemento">
+                        </div>
+                        <div class="item cidade">
+                            <p>Cidade:</p>
+                            <input minlength="2" maxlength="50" type="text" name="cidade" id="cidade" required>
+                        </div>
+                        <div class="item uf">
+                            <p>UF:</p>
+                            <input minlength="2" maxlength="2" type="text" name="uf" id="uf" required>
+                        </div>
+                    </div>
+                </div>
+                <!-- Formulário CNPJ -->
+                <div class="formulario" style="display: none;" id="formulario-cnpj">
+                    <div class="item-group">
+                        <div class="item cnpj">
+                            <p>CNPJ:</p>
+                            <input type="text" name="cnpj" id="cnpj" minlength="18" maxlength="18" required>
+                        </div>
+                    </div>
+                    <div class="item-group">
+                        <div class="item nome-fantasia">
+                            <p>Nome Fantasia:</p>
+                            <input minlength="6" maxlength="50" type="text" name="nome-fantasia" id="nome-fantasia" required> 
+                        </div>
+                        <div class="item razao-social">
+                            <p>Razão Social:</p>
+                            <input minlength="6" maxlength="50" type="text" name="razao-social" id="razao-social" required>
+                        </div>
+                    </div>
+                    <div class="item-group">
+                        <div class="item ie">
+                            <p>Inscrição Estadual:</p>
+                            <input minlength="9" maxlength="9" type="text" name="ie" id="ie">
+                        </div>
+                        <div class="item telefone">
+                            <p>Telefone:</p>
+                            <input minlength="14" maxlength="15" type="text" name="telefone2" id="telefone2" required>
+                        </div>
+                        <div class="item email">
+                            <p>Email</p>
+                            <input minlength="12" maxlength="50" type="text" name="email2" id="email2" required>
+                        </div>
+                    </div>
+                    <div class="item-group">
+                        <div class="item cep">
+                            <p>CEP:</p>
+                            <input minlength="10" maxlength="10" type="text" name="cep2" id="cep2" required>
+                        </div>
+                        <div class="item logradouro">
+                            <p>Logradouro (Rua, Avenida, etc):</p>
+                            <input minlength="4" maxlength="50" type="text" name="logradouro2" id="logradouro2" required>
+                        </div>
+                        <div class="item numero">
+                            <p>Número:</p>
+                            <input minlength="1" maxlength="5" type="text" name="numero2" id="numero2" required>
+                        </div>
+                        <div class="item bairro">
+                            <p>Bairro:</p>
+                            <input minlength="3" maxlength="50" type="text" name="bairro2" id="bairro2" required>
+                        </div>
+                    </div>
+                    <div class="item-group">
+                        <div class="item complemento">
+                            <p>Complemento</p>
+                            <input maxlength="50" type="text" name="complemento2" id="complemento2">
+                        </div>
+                        <div class="item cidade">
+                            <p>Cidade:</p>
+                            <input minlength="1" maxlength="50" type="text" name="cidade2" id="cidade2" required>
+                        </div>
+                        <div class="item uf">
+                            <p>UF:</p>
+                            <input minlength="2" maxlength="2" type="text" name="uf2" id="uf2" required>
+                        </div>
+                    </div>
+                </div>
+                <div style="display: none;" class="formulario-button" id="formulario-button">
+                    <a class="form-button" href="/painel-administrativo/clientes/cadastrar">
+                        <button type="button" class="dismiss-btn">Cancelar</button>
+                    </a>
+                    <button class="confirm-btn form-button" type="submit">Confirmar</button>
+                </div>
+            </form>
+        </div>
+        <!-- Rodapé -->
+        <div class="rodape rodape-pt yellow-pt" id="rodape">
+            <p> &copy 2022 DISTRIBUIDORA BONSUCESSO - Todos os direitos reservados.
+                Desenvolvido por Porto Solutions - RJ </p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/static/js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.mask.min.js"></script>
+    <script type="text/javascript" src="/static/js/clientes/cadastrar-clientes.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#cnpj').mask('00.000.000/0000-00')
+            $('#cpf').mask('000.000.000-00')
+            $('#cep').mask('00.000-000')
+            $('#cep2').mask('00.000-000')
+            $('#telefone').mask('(00) 00000-0000')
+            $('#telefone2').mask('(00) 00000-0000')
+            $('#nascimento').mask('00/00/0000')
+            $('#numero').mask('99999')
+            $('#numero2').mask('99999')
+            $('#ie').mask('000000000')
+            $('#uf').mask('AA', {'translation': {
+                A: {pattern: /[A-Za-z]/}
+            }});
+            $('#uf2').mask('AA', {'translation': {
+                A: {pattern: /[A-Za-z]/}
+            }});
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,181 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+.title {
+    letter-spacing: 1px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    height: 100%;
+}
+.title p {
+    font-size: 40px;
+    margin: auto;
+    height: 100%;
+    font-family: 'Fugaz One', cursive;
+    height: auto;
+}
+.barra-superior {
+    width: 100%;
+    border-bottom: solid 3px gray;
+    font-weight: bold;
+    height: 12vh;
+}
+.container-barra-superior {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    height: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.confirm-btn {
+    cursor: pointer;
+    color: white;
+    background: linear-gradient(black, rgb(43, 42, 42));
+    border: 1px solid black;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 5px;
+    box-shadow: 0px 5px 3px rgba(50, 50, 50, 0.77);
+}
+.yellow-pt {
+    background: linear-gradient(rgb(253, 253, 84), rgb(255, 255, 0));
+}
+.confirm-btn:hover {
+    background: linear-gradient(black, rgb(77, 75, 75));
+}
+.confirm-btn:active {
+    box-shadow: 0px 2px 3px rgba(50, 50, 50, 0.77);
+    position: relative;
+    top: 3px;
+}
+.dismiss-btn {
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+    background: linear-gradient(rgb(133, 132, 132), rgb(179, 178, 178));
+    border: 1px solid black;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 5px;
+    box-shadow: 0px 5px 3px rgba(50, 50, 50, 0.77);
+}
+.dismiss-btn:hover {
+    background: linear-gradient(rgb(133, 132, 132), rgb(226, 226, 226));
+}
+.conteudo {
+    background-color: rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-areas: 
+    'cabecalho cabecalho cabecalho cabecalho cabecalho cabecalho cabecalho'
+    'barra-lateral corpo corpo corpo corpo corpo corpo'
+    'rodape rodape rodape rodape rodape rodape rodape';
+}
+.cabecalho-pt {
+    height: 8vh;
+    grid-area: cabecalho;
+    display: flex;
+    justify-content: space-between;
+}
+.vacuo-pt {
+    width: 16.6%;
+}
+.menu-pt {
+    padding-left: 5px;
+    width: 83.4%;
+    display: flex;
+}
+.menu-pt a {
+    padding: 5px 15px 0px 15px;
+    min-width: 12%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin-right: 10px;
+    margin-top: 10px;
+    border: 1px solid rgb(153, 153, 153);
+    border-radius: 10px 10px 0px 0px;
+    font-weight: bold;
+    color: rgb(49, 49, 49);
+    text-decoration: none;
+}
+.barra-lateral-pt {
+    grid-area: barra-lateral;
+    padding: 0!important;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 25vh;
+}
+.barra-lateral-pt a {
+    width: 85%;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgb(153, 153, 153);
+    margin-bottom: 3px;
+    text-align: center;
+    padding: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    color: rgb(49, 49, 49);
+    border-radius: 30px 0 0 5px;
+}
+.corpo-pt {
+    background-color: white!important;
+    min-height: 70vh;
+    grid-area: corpo;
+    padding: 40px;
+    width: 191vh;
+}
+.alert-pt {
+    padding: 5px 20px;
+    background-color: yellow;
+    border-radius: 10px;
+    text-align: center;
+}
+.alert-pt p {
+    margin: 0;
+}
+.rodape-pt {
+    grid-area: rodape;
+    min-height: 10vh;
+    display: flex;
+    text-align: center;
+}
+.rodape-pt p {
+    font-size: small;
+    margin: auto;
+}
+.active-lt-bar {
+    border-right: none!important;
+    background-color: white!important;
+    width: 90%!important;
+}
+.active-menu {
+    border-bottom: none!important;
+    background-color: white!important;
+    margin-top: 5px!important;
+}
+@media (max-width: 768px) {
+    .confirm-btn:hover {
+        background: linear-gradient(black, rgb(43, 42, 42));
+    }
+    .title p {
+        font-size: 28px;
+    }
+}
+@media (max-width: 375px) {
+    .title p {
+        font-size: 25px;
+    }
+}
+@media (max-width: 300px) {
+    .title p {
+        font-size: 23px;
+    }
+}

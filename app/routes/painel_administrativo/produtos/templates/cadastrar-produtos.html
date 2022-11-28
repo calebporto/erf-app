@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/static/css/produtos/cadastrar.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/patterns.css"/>
+    <title>Cadastrar Produtos - Distribuidora Bonsucesso</title>
+</head>
+<body>
+    <div class="barra-superior yellow-pt">
+        <div class="container container-barra-superior">
+            <div class="title">
+                <p>DISTRIBUIDORA BONSUCESSO</p>
+            </div>
+        </div>
+    </div>
+    <div class="conteudo">
+        <!-- Barra superior -->
+        <div class="cabecalho cabecalho-pt" id="cabecalho">
+            <div class="vacuo vacuo-pt"></div>
+            <div class="menu menu-pt">
+                <a href="/painel-administrativo/produtos/lista-de-produtos">Lista de Produtos</a>
+                <a href="/painel-administrativo/produtos/cadastrar" class="active-menu">Cadastrar</a>
+            </div>
+        </div>
+        <!-- Barra lateral -->
+        <div class="barra-lateral barra-lateral-pt" id="barra-lateral">
+            <a href="/painel-administrativo">Início</a>
+            <a href="/painel-administrativo/vendas">Vendas</a>
+            <a href="/painel-administrativo/clientes">Clientes</a>
+            <a href="/painel-administrativo/produtos" class="active-lt-bar">Produtos</a>
+            <a href="/painel-administrativo/vendedores">Vendedores</a>
+            <a href="/painel-administrativo/cobrancas">Cobranças</a>
+        </div>
+        <!-- Conteúdo da página -->
+        <div class="corpo corpo-pt" id="corpo">
+            {% set messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages  %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>{{ message }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <form enctype="multipart/form-data" action="/painel-administrativo/produtos/cadastrar" method="post">
+                <div class="form-group">
+                    <div class="form-item nome">
+                        <p>Nome do produto:</p>
+                        <input minlength="1" maxlength="30" type="text" name="nome" id="nome" required>
+                    </div>
+                    <div class="form-item preco">
+                        <p>Preço:</p>
+                        <input type="text" name="preco" id="preco" required>
+                    </div>
+                    <div class="form-item peso">
+                        <p>Peso (em Kg):</p>
+                        <input type="text" name="peso" id="peso" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-item estoque">
+                        <p>Estoque:</p>
+                        <input type="number" name="estoque" id="estoque" required>
+                    </div>
+                    <div class="form-item ean">
+                        <p>Código de barras:</p>
+                        <input minlength="13" maxlength="13" type="text" name="ean" id="ean">
+                        <p class="input-description">(Opcional)</p>
+                    </div>
+                    <div class="form-item marca">
+                        <p>Marca:</p>
+                        <input minlength="1" maxlength="30" type="text" name="marca" id="marca">
+                        <p class="input-description">(Opcional)</p>
+                    </div>
+                    <div class="form-item categoria">
+                        <p>Categoria:</p>
+                        <input minlength="1" maxlength="30" type="text" name="categoria" id="categoria">
+                        <p class="input-description">(Opcional)</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-item custo">
+                        <p>Custo:</p>
+                        <input type="text" name="custo" id="custo">
+                        <p class="input-description">(Opcional)</p>
+                    </div>
+                    <div class="form-item desconto">
+                        <p>Desconto (em %):</p>
+                        <input type="text" name="desconto" id="desconto">
+                        <p class="input-description">(Opcional)</p>
+                    </div>
+                    <div class="form-item ncm">
+                        <p>NCM:</p>
+                        <input minlength="8" maxlength="8" type="text" name="ncm" id="ncm" required>
+                    </div>
+                    <div class="form-item cest">
+                        <p>CEST:</p>
+                        <input minlength="7" maxlength="7" type="text" name="cest" id="cest">
+                        <p class="input-description">(Opcional)</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-item medida">
+                        <p>Unidade de medida:</p>
+                        <select name="medida" id="medida" required>
+                            <option value="" disabled selected>-- Clique para selecionar --</option>
+                            <option value="UNID">UNIDADE</option>
+                            <option value="BALDE">BALDE</option>
+                            <option value="BISNAG">BISNAGA</option>
+                            <option value="BOBINA">BOBINA</option>
+                            <option value="BOMB">BOMBONA</option>
+                            <option value="CART">CARTELA</option>
+                            <option value="CENTO">CENTO</option>
+                            <option value="CM">CENTÍMETRO</option>
+                            <option value="CM2">CENTÍMETRO QUADRADO</option>
+                            <option value="CX">CAIXA</option>
+                            <option value="CX2">CAIXA C/2</option>
+                            <option value="CX5">CAIXA C/5</option>
+                            <option value="CX6">CAIXA C/6</option>
+                            <option value="CX10">CAIXA C/10</option>
+                            <option value="CX12">CAIXA C/12</option>
+                            <option value="CX20">CAIXA C/20</option>
+                            <option value="CX25">CAIXA C/25</option>
+                            <option value="CX50">CAIXA C/50</option>
+                            <option value="CX100">CAIXA C/100</option>
+                            <option value="DUZIA">DUZIA</option>
+                            <option value="FARDO">FARDO</option>
+                            <option value="GALAO">GALÃO</option>
+                            <option value="KG">KILO</option>
+                            <option value="KIT">KIT</option>
+                            <option value="LATA">LATA</option>
+                            <option value="LITRO">LITRO</option>
+                            <option value="M">METRO</option>
+                            <option value="M2">METRO QUADRADO</option>
+                            <option value="M3">METRO CÚBICO</option>
+                            <option value="PACOTE">PACOTR</option>
+                            <option value="PC">PEÇA</option>
+                            <option value="TAMBOR">TAMBOR</option>
+                            <option value="SACO">SACO</option>
+                            <option value="TANQUE">TANQUE</option>
+                            <option value="TON">TONELADA</option>
+                        </select>
+                    </div>
+                    <div class="form-item icms-origem">
+                        <p>Origem:</p>
+                        <select name="origem" id="origem" required>
+                            <option value="" selected disabled>-- Clique para selecionar --</option>
+                            <option value="0">Nacional</option>
+                            <option value="1">Importada</option>
+                        </select>
+                    </div>
+                    <div class="form-item imagem">
+                        <p>Imagem do produto:</p>
+                        <input type="file" accept=".png, .jpg, .jpeg" name="imagem" id="imagem">
+                    </div>
+                </div>
+                <div class="form-button">
+                    <button type="reset" class="dismiss-btn">Cancelar</button>
+                    <button type="submit" class="confirm-btn">Confirmar</button>
+                </div>
+            </form>
+        </div>
+        <!-- Rodapé -->
+        <div class="rodape rodape-pt yellow-pt" id="rodape">
+            <p> &copy 2022 DISTRIBUIDORA BONSUCESSO - Todos os direitos reservados.
+                Desenvolvido por Porto Solutions - RJ </p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/static/js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.mask.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#preco').mask('000.000,00', {reverse: true})
+            $('#peso').mask('XXXXXXXXXX', {'translation': {
+                'X': {pattern: /[0-9,]/}
+            }})
+            $('#ean').mask('0000000000000')
+            $('#custo').mask('000.000,00', {reverse: true})
+            $('#desconto').mask('000')
+            $('#ncm').mask('00000000')
+            $('#cest').mask('0000000')
+            $('#estoque').mask('000000')
+        });
+    </script>
+</body>
+</html>

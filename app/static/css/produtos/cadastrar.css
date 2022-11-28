@@ -1,0 +1,49 @@
+form {
+    width: 100%;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.form-item {
+    padding: 10px;
+}
+.nome {
+    width: 50%;
+}
+.preco, .peso, .estoque, .custo {
+    width: 15%;
+}
+.desconto {
+    width: 16%;
+}
+.imagem {
+    width: 50%;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    border: solid 1px gray;
+}
+.form-item p {
+    font-weight: bold;
+}
+.form-item input, .form-item select{
+    width: 100%;
+    padding: 5px;
+}
+.input-description {
+    font-size: x-small;
+    font-weight: normal!important;
+}
+.form-button {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-around;
+}
+.form-button button {
+    width: 35%;
+}

@@ -1,0 +1,88 @@
+.corpo form {
+    width: 100%;
+}
+.formulario {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: 2px solid gray;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+.item-group {
+    display: flex;
+    margin-bottom: 15px;
+    justify-content: space-between;
+}
+.item {
+    margin-right: 10px;
+}
+.item p {
+    font-weight: bold;
+}
+.item input {
+    padding: 5px;
+    width: 100%;
+}
+.item.sexo {
+    height: 100%;
+    margin: auto;
+    margin-left: 0;
+    border: dotted 1px gray;
+    border-radius: 10px;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.radio-group {
+    display: flex;
+}
+.radio-item {
+    display: flex;
+    margin: auto;
+    margin-right: 20px;
+    height: 100%;
+}
+.radio-item input {
+    width: 15%;
+    margin-right: 5px;
+}
+.nascimento {
+    width: 15%;
+}
+.telefone, .cep, .cpf {
+    width: 20%;
+}
+.email, .nome {
+    width: 50%;
+}
+.numero, .uf {
+    width: 7%;
+}
+.logradouro, .bairro {
+    width: 35%;
+    margin-left: 10px;
+}
+.complemento, .cidade, .nome-fantasia, .razao-social {
+    width: 45%;
+}
+.formulario-button {
+    width: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    margin-top: 25px;
+}
+.form-button {
+    width: 35%;
+    font-size: large;
+}
+.form-button button {
+    width: 100%;
+    font-size: large;
+}
+.new-form-title {
+    font-size: 20px;
+    text-align: center;
+}
